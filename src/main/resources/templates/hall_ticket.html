@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall Ticket - Online Exam Registration</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar print-hide">
+    <a th:href="@{/dashboard}" class="navbar-brand">ExamPortal</a>
+    <div class="nav-links">
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/logout}" class="btn-logout">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="print-hide" style="text-align: right; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <button onclick="window.print()" class="btn btn-primary" style="width: auto;">Print Hall Ticket</button>
+    </div>
+
+    <div class="glass-panel hall-ticket-container">
+        <div class="ticket-header">
+            <h1>HALL TICKET</h1>
+            <p class="text-muted">Online Examination Portal</p>
+        </div>
+
+        <div class="ticket-body">
+            <div>
+                <div class="info-group">
+                    <div class="info-label">Candidate Name</div>
+                    <div class="info-value" th:text="${registration.candidateName}"></div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">Register Number</div>
+                    <div class="info-value" th:text="${registration.registerNumber}"></div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">College Name</div>
+                    <div class="info-value" th:text="${registration.collegeName}"></div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">Candidate Address</div>
+                    <div class="info-value" style="white-space: pre-line;" th:text="${registration.address}"></div>
+                </div>
+            </div>
+
+            <div>
+                <div class="info-group">
+                    <div class="info-label">Exam Subject</div>
+                    <div class="info-value" style="color: var(--primary-color); font-weight: 700;" th:text="${registration.examName}"></div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">Exam Date</div>
+                    <div class="info-value" th:text="${registration.examDate}"></div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">Exam Center / Location</div>
+                    <div class="info-value" th:text="${location}"></div>
+                </div>
+
+                <div class="info-group" style="margin-top: 3rem; text-align: center;">
+                    <div style="border-top: 1px solid var(--border-color); width: 200px; margin: 0 auto; padding-top: 0.5rem; color: var(--text-secondary); font-size: 0.875rem;">
+                        Signature of the Invigilator
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ticket-footer">
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">
+                <strong>Important Instructions:</strong> Please carry a valid original photo ID card along with this hall ticket. Electronics are strictly prohibited.
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

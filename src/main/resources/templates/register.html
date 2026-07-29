@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Online Exam Registration</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/dashboard}" class="navbar-brand">ExamPortal</a>
+    <div class="nav-links">
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/logout}" class="btn-logout">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="glass-panel" style="max-width: 600px; margin: 0 auto; padding: 2.5rem;">
+        <div class="text-center mb-4">
+            <h1>Exam Registration</h1>
+            <p class="text-muted">Register for <strong style="color: var(--primary-color);" th:text="${examId}">Exam</strong></p>
+        </div>
+
+        <div th:if="${ageError}" class="alert alert-error" th:text="${ageError}"></div>
+
+        <form th:action="@{/register}" th:object="${registration}" method="post">
+            <input type="hidden" th:field="*{examName}" />
+            <input type="hidden" th:field="*{examDate}" />
+
+            <div class="form-group">
+                <label for="candidateName">Candidate Full Name</label>
+                <input type="text" id="candidateName" th:field="*{candidateName}" class="form-control" placeholder="Enter your full name">
+                <span class="error-text" th:if="${#fields.hasErrors('candidateName')}" th:errors="*{candidateName}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="dateOfBirth">Date of Birth (Must be 18+)</label>
+                <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" class="form-control">
+                <span class="error-text" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="collegeName">College Name</label>
+                <input type="text" id="collegeName" th:field="*{collegeName}" class="form-control" placeholder="Enter your college name">
+                <span class="error-text" th:if="${#fields.hasErrors('collegeName')}" th:errors="*{collegeName}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="registerNumber">Register Number</label>
+                <input type="text" id="registerNumber" th:field="*{registerNumber}" class="form-control" placeholder="Enter your register/roll number">
+                <span class="error-text" th:if="${#fields.hasErrors('registerNumber')}" th:errors="*{registerNumber}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Full Address</label>
+                <textarea id="address" th:field="*{address}" class="form-control" rows="3" placeholder="Enter your complete postal address"></textarea>
+                <span class="error-text" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <a th:href="@{/dashboard}" class="btn btn-secondary" style="flex: 1;">Cancel</a>
+                <button type="submit" class="btn btn-primary" style="flex: 1;">Submit & Generate Ticket</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

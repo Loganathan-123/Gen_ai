@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Online Exam Registration</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/dashboard}" class="navbar-brand">ExamPortal</a>
+    <div class="nav-links">
+        <span style="margin-right: 1rem;">Welcome, <strong th:text="${username}">User</strong>!</span>
+        <a th:href="@{/logout}" class="btn-logout">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div>
+            <h1>Available Exams</h1>
+            <p class="text-muted">Select an exam to register and generate your hall ticket.</p>
+        </div>
+    </div>
+
+    <div th:if="${param.error}" class="alert alert-error">
+        <span th:if="${param.error[0] == 'already_registered'}">You are already registered for this exam.</span>
+        <span th:if="${param.error[0] == 'not_found'}">Registration not found.</span>
+        <span th:if="${param.error[0] == 'unauthorized'}">You are not authorized to view this ticket.</span>
+    </div>
+
+    <div class="grid">
+        <div class="glass-panel exam-card" th:each="exam : ${exams}">
+            <h3 th:text="${exam.id}">Exam Name</h3>
+            <p class="desc" th:text="${exam.name}">Exam Description</p>
+            <div class="details">
+                <div><strong>Exam Date:</strong> <span th:text="${exam.examDate}"></span></div>
+                <div><strong>Due Date:</strong> <span th:text="${exam.dueDate}"></span></div>
+            </div>
+            <a th:href="@{/register/{id}(id=${exam.id})}" class="btn btn-primary" style="margin-top: auto;">Register Now</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
